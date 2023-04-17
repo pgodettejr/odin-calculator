@@ -1,3 +1,11 @@
+let first = 0;
+let second = 0;
+let operator = '';
+
+/* function operate(operator, first, second) {
+ 
+}; */
+
 const add = function(a, b) {
   return a + b;
 };
