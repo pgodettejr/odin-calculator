@@ -4,6 +4,16 @@ let operator = '';
 
 function operate(operator, first, second) {
   // Code to call the functions below goes here
+  // Need to create a separate division function, then update 
+  if (operator === '+') {
+    return add(first, second);
+  } else if (operator === '-') {
+    return subtract(first, second);
+  } else if (operator === '*') {
+    return multiply(first, second);
+  } else {
+    return first / second;
+  }
 };
 
 const add = function(a, b) {
@@ -38,7 +48,13 @@ const multiply = function(array) {
     : 0;
 };
 
-const power = function(x, y) {
+const divide = function(array) {
+  return array.length
+    ? array.reduce((accumulator, nextItem) => accumulator / nextItem)
+    : 0;
+};
+
+/* const power = function(x, y) {
   return Math.pow(x, y)
 };
 
@@ -55,4 +71,4 @@ const factorial = function(num) {
   }
 
   return result;
-};
+}; */
