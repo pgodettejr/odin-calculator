@@ -2,9 +2,9 @@ let first = 0;
 let second = 0;
 let operator = '';
 
-/* function operate(operator, first, second) {
- 
-}; */
+function operate(operator, first, second) {
+  // Code to call the functions below goes here
+};
 
 const add = function(a, b) {
   return a + b;
