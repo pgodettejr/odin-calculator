@@ -1,18 +1,27 @@
+const container = document.getElementById("#container");
+const output = document.getElementById("output");
+const form = document.getElementById("calc_display");
+const buttons = document.querySelectorAll(".buttons");
+
+// Will need to add event listeners for our buttons
+// Functions that populate the display when you click the buttons
+// Store the 'display value' in a variable somewhere
+
 let first = 0;
 let second = 0;
 let operator = '';
 
 function operate(operator, first, second) {
-  // Code to call the functions below goes here
-  // Need to create a separate division function, then update 
   if (operator === '+') {
     return add(first, second);
   } else if (operator === '-') {
     return subtract(first, second);
   } else if (operator === '*') {
     return multiply(first, second);
+  } else if (operator === '/') {
+    return divide(first, second);
   } else {
-    return first / second;
+    return "?";
   }
 };
 
