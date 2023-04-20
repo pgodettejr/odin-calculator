@@ -3,13 +3,35 @@ const output = document.getElementById("output");
 const form = document.getElementById("calc_display");
 const buttons = document.querySelectorAll(".buttons");
 
-// Will need to add event listeners for our buttons
 // Functions that populate the display when you click the buttons
 // Store the 'display value' in a variable somewhere
 
 let first = 0;
 let second = 0;
 let operator = '';
+
+function storeFirst() {
+  first = parseFloat(form.value);
+  form.value = '';
+  operator = '';
+  return first;
+}
+
+function storeSecond() {
+  second = parseFloat(form.value);
+  form.value = operate(operator, first, second);
+}
+
+function answer() {
+  if (first, operator) {
+    storeSecond();
+  }
+}
+
+buttons.forEach((button) => {
+  button.addEventListener('click', operate);
+  answer();
+});
 
 function operate(operator, first, second) {
   if (operator === '+') {
