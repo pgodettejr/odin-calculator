@@ -10,9 +10,9 @@
 <body>
     <div id="container"></div>
         <div class="display">
-            <form id="calc_display"> <!-- Shouldn't this be a class? -->
-                <input type="text" disabled id="output" class="calc_output" value="0"/>
-            </form>
+            <div data-display class="calc_display">
+                <input type="text" id="output" class="calc_output" value="0"/>
+            </div>
         </div>
         <div class="buttons">
             <button data-type="operand" value="7" class="btn btn-grey" id="7">7</button>

@@ -1,10 +1,9 @@
-const container = document.getElementById("#container");
+const container = document.getElementById("container");
 const output = document.getElementById("output");
-const form = document.getElementById("calc_display");
-const buttons = document.querySelectorAll(".buttons");
-
-// Functions that populate the display when you click the buttons
-// Store the 'display value' in a variable somewhere
+const data = document.getElementById("calc_display");
+const buttons = document.querySelectorAll(".buttons button");
+// See operator event listener below
+const operatorButtons = document.querySelectorAll('[data-type="operator"]');
 
 // Parts of a calculator operation
 let first = 0;
@@ -13,29 +12,47 @@ let operator = '';
 
 // Stores first number
 function storeFirst() {
-  first = parseFloat(form.value);
-  form.value = '';
+  first = parseFloat(output.value);
+  output.value = '';
   operator = '';
   return first;
 }
 
 // Stores second number
 function storeSecond() {
-  second = parseFloat(form.value);
-  form.value = operate(operator, first, second);
+  second = parseFloat(output.value);
+  output.value = operate(operator, first, second);
 }
 
 // Defines when first number & operator are set then calls second number
 function answer() {
-  if (first, operator) {
+  if (first && operator) {
     storeSecond();
   }
 }
 
 // Runs operate, then populates answer on display as buttons are clicked
 buttons.forEach((button) => {
-  button.addEventListener('click', operate);
-  answer();
+  button.addEventListener('click', function() {
+    if(button.dataset.type === 'operator') {
+      operator = button.value;
+      answer();
+    } else if (button.dataset.type === 'operand') {
+      output.value += button.value;
+    } else if (button.dataset.type === 'clear') {
+      output.value = '';
+      first = 0;
+      second = 0;
+      operator = '';
+    }
+  });
+});
+
+// This SHOULD add event listeners for operator buttons but it doesn't
+operatorButtons.forEach((button) => {
+  button.addEventListener('click', function() {
+    operator = button.value;
+  });
 });
 
 // Returns answers to equations using variables above
@@ -49,7 +66,7 @@ function operate(operator, first, second) {
   } else if (operator === '/') {
     return divide(first, second);
   } else {
-    return "?";
+    return "ERROR";
   }
 };
 
@@ -109,4 +126,9 @@ const factorial = function(num) {
   }
 
   return result;
-}; */
+}; 
+
+buttons.forEach((button) => {
+  button.addEventListener('click', operate);
+  answer();
+}); */
