@@ -6,10 +6,12 @@ const buttons = document.querySelectorAll(".buttons");
 // Functions that populate the display when you click the buttons
 // Store the 'display value' in a variable somewhere
 
+// Parts of a calculator operation
 let first = 0;
 let second = 0;
 let operator = '';
 
+// Stores first number
 function storeFirst() {
   first = parseFloat(form.value);
   form.value = '';
@@ -17,22 +19,26 @@ function storeFirst() {
   return first;
 }
 
+// Stores second number
 function storeSecond() {
   second = parseFloat(form.value);
   form.value = operate(operator, first, second);
 }
 
+// Defines when first number & operator are set then calls second number
 function answer() {
   if (first, operator) {
     storeSecond();
   }
 }
 
+// Runs operate, then populates answer on display as buttons are clicked
 buttons.forEach((button) => {
   button.addEventListener('click', operate);
   answer();
 });
 
+// Returns answers to equations using variables above
 function operate(operator, first, second) {
   if (operator === '+') {
     return add(first, second);
@@ -47,6 +53,7 @@ function operate(operator, first, second) {
   }
 };
 
+// Math functions
 const add = function(a, b) {
   return a + b;
 };
