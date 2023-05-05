@@ -1,14 +1,15 @@
 const container = document.getElementById("container");
 const output = document.getElementById("output");
 const data = document.getElementById("calc_display");
-const operands = document.querySelectorAll('[data-type="operand"]');
-const operators = document.querySelectorAll('[data-type="operator"]');
+const numButtons = document.querySelectorAll("number");
+const opButtons = document.querySelectorAll("operator");
+const clear = document.querySelector("clear");
 
 // Parts of a calculator operation (Me)
 let first = 0;
 let second = 0;
 let operator = '';
-let result = '';
+// let result = '';
 
 // Math functions (Me)
 const add = function(a, b) {
@@ -94,28 +95,34 @@ function answer() {
 }
 
 // Operator button functionality; populates next number on display (ChatGPT)
-operators.forEach((button) => {
+opButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if(button.dataset.type === 'operator') {
+    if(button.class === 'operator') {
       operator = button.value;
       clearDisplay();
       answer();
-    } else if (button.dataset.type === 'clear') {
-      output.value = '';
-      first = 0;
-      second = 0;
-      operator = '';
     }
   });
 });
 
 // Number button functionality
-operands.forEach((button) => {
+numButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if (button.dataset.type === 'operand') {
+    if (button.value === 'number') {
       output.value += button.value;
     } 
   });
+});
+
+// Clear button functionality
+clear.addEventListener('click', () => {
+  if (button.class === 'clear') {
+    output.value = '';
+    first = 0;
+    second = 0;
+    operator = '';
+    // clearDisplay();
+  }
 });
 
 /* This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
