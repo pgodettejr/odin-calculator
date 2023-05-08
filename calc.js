@@ -1,9 +1,10 @@
 const container = document.getElementById("container");
 const output = document.getElementById("output");
-const data = document.getElementById("calc_display");
-const numButtons = document.querySelectorAll("number");
-const opButtons = document.querySelectorAll("operator");
-const clear = document.querySelector("clear");
+// const data = document.getElementById("calc_display");
+const numButtons = document.querySelectorAll(".number");
+const opButtons = document.querySelectorAll(".operator");
+const equalButton = document.querySelector(".equals");
+const clearButton = document.querySelector(".clear");
 
 // Parts of a calculator operation (Me)
 let first = 0;
@@ -20,7 +21,7 @@ const subtract = function(c, d) {
   return c - d;
 };
 
-const sum = function(multi) {
+/* const sum = function(multi) {
   let sum = 0;
   
   if(multi.length === 0) {
@@ -36,7 +37,7 @@ const sum = function(multi) {
   }
 
   return sum;
-};
+}; */
 
 const multiply = function(array) {
   return array.length
@@ -67,15 +68,15 @@ function operate(operator, first, second) {
 
 // Clears display (Google - CodePen)
 function clearDisplay() {
-  data.innerText = '';
+  output.value = '';
 }
 
 // Stores first number (StackOverflow)
 function storeFirst() {
   first = parseFloat(output.value);
   output.value = '';
-  operator = '';
-  return first;
+  // operator = '';
+  // return first;
 }
 
 // Function that stores the operator? StackOverflow code doesn't quite make sense here
@@ -84,22 +85,25 @@ function storeFirst() {
 function storeSecond() {
   second = parseFloat(output.value);
   output.value = operate(operator, first, second);
-  return second;
+  first = parseFloat(output.value);
+  // return second;
 }
 
 // Defines when first number & operator are set then calls second number (StackOverflow)
 function answer() {
+  clearDisplay();
   if (first && operator) {
     storeSecond();
+    // return operate(operator, first, second);
   }
 }
 
 // Operator button functionality; populates next number on display (ChatGPT)
 opButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if(button.class === 'operator') {
+    if (button.classList.contains('operator')) {
       operator = button.value;
-      clearDisplay();
+      // output.value = operate(operator, first, second);
       answer();
     }
   });
@@ -108,20 +112,29 @@ opButtons.forEach((button) => {
 // Number button functionality
 numButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if (button.value === 'number') {
-      output.value += button.value;
-    } 
+    let buttonContent = button.innerText;
+    output.value += buttonContent; 
   });
 });
 
+// Equals button functionality
+equalButton.addEventListener('click', () => {
+  if (first && operator) {
+    output.value = operate(operator, first, parseFloat(output.value));
+    
+    first = 0;
+    second = 0;
+    operator = '';
+  }
+});
+
 // Clear button functionality
-clear.addEventListener('click', () => {
-  if (button.class === 'clear') {
+clearButton.addEventListener('click', () => {
+  if (clearButton.classList.contains('clear')) {
     output.value = '';
     first = 0;
     second = 0;
     operator = '';
-    // clearDisplay();
   }
 });
 
