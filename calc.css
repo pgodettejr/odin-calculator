@@ -10,7 +10,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+/* Can either add a div in the HTML, flexbox the container, then grid the new div or grid/flex the display and buttons separately (see .buttons comment below) */
 #container {
   background-color: #131313;
   height: 50vh;
@@ -22,6 +22,8 @@ body {
   padding: 25px 35px;
   border-radius: 10px;
 }
+
+/* Regardless, display needs to be styled separately with color etc. (with or without grid/flex elements) */
 
 /* .buttons {
   display: grid;
