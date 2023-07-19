@@ -76,7 +76,7 @@ buttons.forEach((button) => {
     if (button.dataset.type === 'operator') {
       operator = button.value;
       answer();
-    } else if (button.dataset.type === 'operand') {
+    } else if (button.dataset.type === 'number') {
       output.value += button.value;
     } else if (button.dataset.type === 'clear') {
       output.value = '';
