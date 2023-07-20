@@ -2,6 +2,7 @@ const container = document.getElementById("container");
 const output = document.getElementById("output");
 const data = document.getElementById("calc_display");
 const buttons = document.querySelectorAll(".buttons button");
+// Will VERY likely need to separate the button query selector into multiple sections (number, operator, equals, clear)
 
 // Parts of a calculator operation (Me)
 let first = 0;
@@ -70,7 +71,10 @@ function answer() {
   }
 }
 
+// Possibly need up to 4 more functions: displays number, shows number on display, clears screen and/or all values, calculates the result of equation
+
 // Runs operate, then populates answer on display as buttons are clicked
+// Will VERY likely need to separate this function into multiple forEach functions (number, operator, equals, clear - see DOM elements at top)
 buttons.forEach((button) => {
   button.addEventListener('click', function() {
     if (button.dataset.type === 'operator') {
@@ -87,13 +91,10 @@ buttons.forEach((button) => {
   })
 })
 
-/* This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
-// This code seems to not make sense given the code above is nearly the same thing but for all buttons
-operatorButtons.forEach((button) => {
-  button.addEventListener('click', function() {
-    operator = button.value;
-  });
-}); */
+// May need this to prevent a "form submission" when entering buttons?
+/* data.addEventListener("submit", (e) => {
+   e.preventDefault();
+}) */
 
 
 // Old and/or incorrect code
@@ -188,4 +189,12 @@ clearButton.addEventListener('click', () => {
     second = 0;
     operator = '';
   }
+}); */
+
+/* This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
+// This code seems to not make sense given the code above is nearly the same thing but for all buttons
+operatorButtons.forEach((button) => {
+  button.addEventListener('click', function() {
+    operator = button.value;
+  });
 }); */
