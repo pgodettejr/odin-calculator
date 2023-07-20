@@ -20,7 +20,7 @@ body {
   align-items: center;
   padding: 25px 35px;
   margin-top: 10%; /* I hate this solution just to center the calculator */
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .calc_display {
@@ -41,6 +41,7 @@ input[type="text"] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
 }
 
 button {
