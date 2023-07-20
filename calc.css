@@ -23,12 +23,19 @@ body {
   border-radius: 10px;
 }
 
-/* Regardless, display needs to be styled separately with color etc. (with or without grid/flex elements) */
-/* .display {
-  background-color: #131313;
+.calc_display {
+  margin-bottom: 2em;
+}
+
+input[type="text"] {
+  font-size: 50px;
+  background-color: #2b2a2a;
   border-radius: 20px;
+  text-align: end;
+  width: 300px;
+  height: 1.25em;
   color: #FFFFFF
-} */
+}
 
 .buttons {
   display: grid;
