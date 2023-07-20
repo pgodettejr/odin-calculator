@@ -10,25 +10,32 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* Can either add a div in the HTML, flexbox the container, then grid the new div or grid/flex the display and buttons separately (see .buttons comment below) */
+
 #container {
   background-color: #131313;
   height: 50vh;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 25px 35px;
+  margin-top: 10%; /* I hate this solution just to center the calculator */
   border-radius: 10px;
 }
 
 /* Regardless, display needs to be styled separately with color etc. (with or without grid/flex elements) */
-
-/* .buttons {
-  display: grid;
-  grid-template-columns: ;
+/* .display {
+  background-color: #131313;
+  border-radius: 20px;
+  color: #FFFFFF
 } */
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
 button {
   border-radius: 10px;
   width: 80px;
