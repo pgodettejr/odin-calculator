@@ -1,6 +1,6 @@
-const container = document.getElementById("container");
-const output = document.getElementById("output");
-const data = document.getElementById("calc_display");
+const container = document.getElementById("container"); // Don't think I need this at all
+const output = document.getElementById("output"); // Think I use either this or const data below, but not both
+const data = document.querySelector(".display");
 // const buttons = document.querySelectorAll(".buttons button");
 
 const numButtons = document.querySelectorAll("[data-type=number]");
@@ -9,12 +9,12 @@ const equalButton = document.querySelector("[data-type=equals]");
 const clearButton = document.querySelector("[data-type=clear]");
 
 
-// Parts of a calculator operation (Me)
-let first = 0;
-let second = 0;
-let operator = '';
+// Parts of a calculator operation (Me). Change operator to currentOperator?
+let first = null;
+let second = null;
+let operator = null;
 let resetScreen = false;
-let result = '';
+let result = null;
 
 // Math functions (Me)
 const add = function(a, b) {
@@ -52,35 +52,35 @@ function operate(operator, first, second) {
   }
 };
 
-// Displays numbers
+// Displays numbers. Change data to output?
 function displayNumber(number) {
   data.innerText += number;
 }
 
-// Shows results on display
+// Shows results on display. Change data to output?
 function showNum() {
   return data.innerText;
 }
 
 // Stores number inputs
 function storeNumber(value) {
-  if (first === 0) {
+  if (first === null) {
     first = value;
   } else {
     second = value;
   }
 }
 
-// Stores operator inputs
+// Stores operator inputs. Change operator to currentOperator if variable is changed above & button.value to operator
 function storeOperator(operator) {
-  if (operator === '') {
+  if (operator === null) {
     operator = button.value;
   } else if (first && second) {
-    result = operate(operator, first, second);
+    result = operate(Number(first), Number(second), operator);
     clearDisplay();
     displayNumber(result);
     first = result;
-    second = 0;
+    second = null;
     operator = button.value;
   }
 }
@@ -102,9 +102,9 @@ function clearDisplay() {
 
 // Resets all values & clears display
 function clearAll() {
-  first = 0;
-  second = 0;
-  operator = '';
+  first = null;
+  second = null;
+  operator = null;
   clearDisplay();
 }
 
@@ -157,7 +157,7 @@ equalButton.addEventListener('click', () => {
 // Clear button functionality
 clearButton.addEventListener('click', () => {
   if (button.dataset.type === 'clear') {
-    clearDisplay();
+    clearAll();
     /*output.value = '';
     first = 0;
     second = 0;
