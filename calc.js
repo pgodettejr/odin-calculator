@@ -87,19 +87,25 @@ function storeOperator(operator) {
 
 // Calculates result
 function answer() {
-  if (first && operator && !second) { 
+  if (first && operator && !resetScreen && !second) { 
     storeOperator(showNum());
-    return operate(operator, first, second);
+    return operate(Number(first), Number(second), operator);
   } else {
     return false;
   }
 }
 
-// Possibly need a "clears all values" function
-
 // Clears display
 function clearDisplay() {
   data.innerText = '';
+}
+
+// Resets all values & clears display
+function clearAll() {
+  first = 0;
+  second = 0;
+  operator = '';
+  clearDisplay();
 }
 
 // Runs operate, then populates answer on display as buttons are clicked
