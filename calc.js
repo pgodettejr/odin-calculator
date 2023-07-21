@@ -73,18 +73,16 @@ function storeNumber() {
 // Stores operator inputs
 function storeOperator() {
   if (operator === '') {
-    operator = operator;
+    operator = buttons.value;
   } else if (first && second) {
     result = operate(operator, first, second);
     clearDisplay();
     displayNumber(result);
     first = result;
     second = 0;
-    operator = operator;
+    operator = buttons.value;
   }
 }
-
-// Possibly need up to 4 more functions: clears all values
 
 // Calculates result
 function answer() {
@@ -95,6 +93,8 @@ function answer() {
     return false;
   }
 }
+
+// Possibly need a "clears all values" function
 
 // Clears display
 function clearDisplay() {
@@ -142,10 +142,10 @@ numButtons.forEach((button) => {
 equalButton.addEventListener('click', () => {
   if (first && operator) {
     output.value = operate(operator, first, parseFloat(output.value));
-    
-    first = 0;
-    second = 0;
-    operator = '';
+    clearDisplay();
+    if (result) {
+      displayNumber(result);
+    }
   }
 });
 
@@ -236,6 +236,16 @@ function answer() {
 buttons.forEach((button) => {
   button.addEventListener('click', operate);
   answer();
+});
+
+opButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    if (button.dataset.type === 'operator') {
+      operator = button.value;
+      // output.value = operate(operator, first, second);
+      answer();
+    }
+  });
 });
 
 // This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
