@@ -13,7 +13,7 @@ const clearButton = document.querySelector("[data-type=clear]");
 let first = 0;
 let second = 0;
 let operator = '';
-// let result = '';
+let result = '';
 
 // Math functions (Me)
 const add = function(a, b) {
@@ -122,7 +122,7 @@ function clearDisplay() {
 // Operator button functionality; populates next number on display (ChatGPT)
 opButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    if (button.classList.contains('operator')) {
+    if (button.dataset.type === 'operator') {
       operator = button.value;
       // output.value = operate(operator, first, second);
       answer();
