@@ -3,10 +3,10 @@ const output = document.getElementById("output"); // Think I use either this or 
 const data = document.querySelector(".display");
 // const buttons = document.querySelectorAll(".buttons button");
 
-const numButtons = document.querySelectorAll("[data-type=number]");
-const opButtons = document.querySelectorAll("[data-type=operator]");
-const equalButton = document.querySelector("[data-type=equals]");
-const clearButton = document.querySelector("[data-type=clear]");
+const numButtons = document.querySelectorAll("button[data-type=number]");
+const opButtons = document.querySelectorAll("button[data-type=operator]");
+const equalButton = document.querySelector("button[data-type=equals]");
+const clearButton = document.querySelector("button[data-type=clear]");
 
 
 // Parts of a calculator operation (Me). Change operator to currentOperator?
@@ -52,12 +52,12 @@ function operate(operator, first, second) {
   }
 };
 
-// Displays numbers. Change data to output?
+// Displays numbers. Change data to output? output.value?
 function displayNumber(number) {
   data.innerText += number;
 }
 
-// Shows results on display. Change data to output?
+// Shows results on display. Change data to output? output.value?
 function showNum() {
   return data.innerText;
 }
