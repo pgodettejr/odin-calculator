@@ -1,7 +1,7 @@
 const container = document.getElementById("container");
 const output = document.getElementById("output");
 const data = document.getElementById("calc_display");
-const buttons = document.querySelectorAll(".buttons button");
+// const buttons = document.querySelectorAll(".buttons button");
 
 const numButtons = document.querySelectorAll("[data-type=number]");
 const opButtons = document.querySelectorAll("[data-type=operator]");
@@ -63,7 +63,7 @@ function showNum() {
 }
 
 // Stores number inputs
-function storeNumber() {
+function storeNumber(value) {
   if (first === 0) {
     first = value;
   } else {
@@ -72,7 +72,7 @@ function storeNumber() {
 }
 
 // Stores operator inputs
-function storeOperator() {
+function storeOperator(operator) {
   if (operator === '') {
     operator = button.value;
   } else if (first && second) {
@@ -121,10 +121,10 @@ function clearDisplay() {
 }) */
 
 // Operator button functionality; populates next number on display (ChatGPT)
-opButtons.forEach((button) => {
-  button.addEventListener('click', (e) => {
+opButtons.forEach((operator) => {
+  operator.addEventListener('click', (e) => {
     storeNumber(showNum());
-    storeOperator(e.target.id);
+    storeOperator(e.target.dataset.type);
     resetScreen = true;
   });
 });
