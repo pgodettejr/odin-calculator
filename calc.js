@@ -13,6 +13,7 @@ const clearButton = document.querySelector("[data-type=clear]");
 let first = 0;
 let second = 0;
 let operator = '';
+let resetScreen = false;
 let result = '';
 
 // Math functions (Me)
@@ -73,20 +74,20 @@ function storeNumber() {
 // Stores operator inputs
 function storeOperator() {
   if (operator === '') {
-    operator = buttons.value;
+    operator = button.value;
   } else if (first && second) {
     result = operate(operator, first, second);
     clearDisplay();
     displayNumber(result);
     first = result;
     second = 0;
-    operator = buttons.value;
+    operator = button.value;
   }
 }
 
 // Calculates result
 function answer() {
-  if (first && operator && !second) { // Can I add a function here as well to show there's no screen reset? e.g: !clearDisplay
+  if (first && operator && !second) { 
     storeOperator(showNum());
     return operate(operator, first, second);
   } else {
@@ -121,12 +122,10 @@ function clearDisplay() {
 
 // Operator button functionality; populates next number on display (ChatGPT)
 opButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (button.dataset.type === 'operator') {
-      operator = button.value;
-      // output.value = operate(operator, first, second);
-      answer();
-    }
+  button.addEventListener('click', (e) => {
+    storeNumber(showNum());
+    storeOperator(e.target.id);
+    resetScreen = true;
   });
 });
 
