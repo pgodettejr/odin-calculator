@@ -1,6 +1,6 @@
 const container = document.getElementById("container"); // Don't think I need this at all
 const output = document.getElementById("output"); // Think I use either this or const data below, but not both
-const data = document.querySelector(".display");
+const data = document.querySelector(".calc_display");
 // const buttons = document.querySelectorAll(".buttons button");
 
 const numButtons = document.querySelectorAll("button[data-type=number]");
@@ -95,7 +95,7 @@ function answer() {
   }
 }
 
-// Clears display
+// Clears display. Change data to output? output.value?
 function clearDisplay() {
   data.innerText = '';
 }
@@ -136,10 +136,13 @@ opButtons.forEach((operator) => {
 });
 
 // Number button functionality
-numButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    let buttonContent = button.innerText;
-    output.value += buttonContent; 
+numButtons.forEach((number) => {
+  number.addEventListener('click', (e) => {
+    if (resetScreen) {
+      clearDisplay();
+    }
+    displayNumber(e.target.innerText);
+    resetScreen = false;
   });
 });
 
@@ -241,6 +244,13 @@ function answer() {
 buttons.forEach((button) => {
   button.addEventListener('click', operate);
   answer();
+});
+
+numButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    let buttonContent = button.innerText;
+    output.value += buttonContent; 
+  });
 });
 
 opButtons.forEach((button) => {
