@@ -2,7 +2,12 @@ const container = document.getElementById("container");
 const output = document.getElementById("output");
 const data = document.getElementById("calc_display");
 const buttons = document.querySelectorAll(".buttons button");
-// Will VERY likely need to separate the button query selector into multiple sections (number, operator, equals, clear)
+
+const numButtons = document.querySelectorAll("[data-type=number]");
+const opButtons = document.querySelectorAll("[data-type=operator]");
+const equalButton = document.querySelector("[data-type=equals]");
+const clearButton = document.querySelector("[data-type=clear]");
+
 
 // Parts of a calculator operation (Me)
 let first = 0;
@@ -46,36 +51,59 @@ function operate(operator, first, second) {
   }
 };
 
-// Stores first number (StackOverflow)
-function storeFirst() {
-  first = parseFloat(output.value);
-  output.value = '';
-  operator = '';
-  return first;
+// Displays numbers
+function displayNumber(number) {
+  data.innerText += number;
 }
 
-// Function that stores the operator? StackOverflow code doesn't quite make sense here
-
-// Stores second number (StackOverflow)
-function storeSecond() {
-  second = parseFloat(output.value);
-  output.value = operate(operator, first, second);
-  first = parseFloat(output.value); // Added later. Not part of OG code
-  return second;
+// Shows results on display
+function showNum() {
+  return data.innerText;
 }
 
-// Defines when first number & operator are set then calls second number (StackOverflow)
-function answer() {
-  if (first && operator) {
-    storeSecond();
+// Stores number inputs
+function storeNumber() {
+  if (first === 0) {
+    first = value;
+  } else {
+    second = value;
   }
 }
 
-// Possibly need up to 4 more functions: displays number, shows number on display, clears screen and/or all values, calculates the result of equation
+// Stores operator inputs
+function storeOperator() {
+  if (operator === '') {
+    operator = operator;
+  } else if (first && second) {
+    result = operate(operator, first, second);
+    clearDisplay();
+    displayNumber(result);
+    first = result;
+    second = 0;
+    operator = operator;
+  }
+}
+
+// Possibly need up to 4 more functions: clears all values
+
+// Calculates result
+function answer() {
+  if (first && operator && !second) { // Can I add a function here as well to show there's no screen reset? e.g: !clearDisplay
+    storeOperator(showNum());
+    return operate(operator, first, second);
+  } else {
+    return false;
+  }
+}
+
+// Clears display
+function clearDisplay() {
+  data.innerText = '';
+}
 
 // Runs operate, then populates answer on display as buttons are clicked
 // Will VERY likely need to separate this function into multiple forEach functions (number, operator, equals, clear - see DOM elements at top)
-buttons.forEach((button) => {
+/* buttons.forEach((button) => {
   button.addEventListener('click', function() {
     if (button.dataset.type === 'operator') {
       operator = button.value;
@@ -89,7 +117,48 @@ buttons.forEach((button) => {
       operator = '';
     }
   })
-})
+}) */
+
+// Operator button functionality; populates next number on display (ChatGPT)
+opButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    if (button.classList.contains('operator')) {
+      operator = button.value;
+      // output.value = operate(operator, first, second);
+      answer();
+    }
+  });
+});
+
+// Number button functionality
+numButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    let buttonContent = button.innerText;
+    output.value += buttonContent; 
+  });
+});
+
+// Equals button functionality
+equalButton.addEventListener('click', () => {
+  if (first && operator) {
+    output.value = operate(operator, first, parseFloat(output.value));
+    
+    first = 0;
+    second = 0;
+    operator = '';
+  }
+});
+
+// Clear button functionality
+clearButton.addEventListener('click', () => {
+  if (button.dataset.type === 'clear') {
+    clearDisplay();
+    /*output.value = '';
+    first = 0;
+    second = 0;
+    operator = '';*/
+  }
+});
 
 // May need this to prevent a "form submission" when entering buttons?
 /* data.addEventListener("submit", (e) => {
@@ -141,9 +210,27 @@ const factorial = function(num) {
   return result;
 }; 
 
-// Clears display (Google - CodePen)
-function clearDisplay() {
+// Store first number input
+function storeFirst() {
+  first = parseFloat(output.value);
   output.value = '';
+  operator = '';
+  return first;
+}
+
+// Store second number input
+function storeSecond() {
+  second = parseFloat(output.value);
+  output.value = operate(operator, first, second);
+  first = parseFloat(output.value); // Added later. Not part of OG code
+  return second;
+}
+
+// Was supposed to define when first number & operator are set then call second number
+function answer() {
+  if (first && operator) {
+    storeSecond();
+  }
 }
 
 buttons.forEach((button) => {
@@ -151,47 +238,7 @@ buttons.forEach((button) => {
   answer();
 });
 
-// Operator button functionality; populates next number on display (ChatGPT)
-opButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    if (button.classList.contains('operator')) {
-      operator = button.value;
-      // output.value = operate(operator, first, second);
-      answer();
-    }
-  });
-});
-
-// Number button functionality
-numButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    let buttonContent = button.innerText;
-    output.value += buttonContent; 
-  });
-});
-
-// Equals button functionality
-equalButton.addEventListener('click', () => {
-  if (first && operator) {
-    output.value = operate(operator, first, parseFloat(output.value));
-    
-    first = 0;
-    second = 0;
-    operator = '';
-  }
-});
-
-// Clear button functionality
-clearButton.addEventListener('click', () => {
-  if (clearButton.classList.contains('clear')) {
-    output.value = '';
-    first = 0;
-    second = 0;
-    operator = '';
-  }
-}); */
-
-/* This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
+// This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)
 // This code seems to not make sense given the code above is nearly the same thing but for all buttons
 operatorButtons.forEach((button) => {
   button.addEventListener('click', function() {
