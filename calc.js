@@ -44,7 +44,7 @@ function operate(x, y, operator) {
   } else if (operator === "divide") {
     return divide(x, y).toFixed(5);
   } else {
-    return "ERROR";
+    return null;
   }
 };
 
@@ -153,13 +153,7 @@ equalButton.addEventListener('click', () => {
 
 // Clear button functionality
 clearButton.addEventListener('click', () => {
-  if (button.dataset.type === "clear") {
-    clearAll();
-    /*output.value = '';
-    first = 0;
-    second = 0;
-    operator = '';*/
-  }
+  clearAll();
 });
 
 // May need this to prevent a "form submission" when entering buttons?
