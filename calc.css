@@ -50,7 +50,28 @@ button {
   font-size: x-large;
 }
 
-/* Buttons: Make operator text orange (#f69906 or #ff8800) and CE text a type of blue (start with #b9fffc for blue) */
+button[data-type="operator"] {
+  color: #ff8800;
+}
+
+button[data-type="clear"] {
+  color: #43daf5;
+}
+
+button[data-type="number"]:hover, [data-type="operator"]:hover {
+  background-color: rgba(29, 29, 29, 0.979);
+}
+
+button[data-type="clear"]:hover, [data-type="equals"]:hover {
+  background-color: rgba(29, 29, 29, 0.979);
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: #131313;
+    align-items: flex-start;
+  }
+}
 
 /* Old CSS
 .calc_display {
