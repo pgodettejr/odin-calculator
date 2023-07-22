@@ -82,7 +82,7 @@ function answer() {
     storeOperator(showNum());
     return operate(Number(first), Number(second), currentOperator);
   } else {
-    return false;
+    return null;
   }
 }
 
