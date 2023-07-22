@@ -50,7 +50,7 @@ button {
   font-size: x-large;
 }
 
-button[data-type="operator"] {
+button[data-type="operator"], [data-type="equals"] {
   color: #ff8800;
 }
 
