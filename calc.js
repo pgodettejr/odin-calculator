@@ -10,8 +10,8 @@ const clearButton = document.querySelector("button[data-type=clear]");
 
 
 // Parts of a calculator operation (Me)
-let first = 0;
-let second = 0;
+let first = null;
+let second = null;
 let currentOperator = null;
 let resetScreen = false;
 let result = null;
@@ -33,7 +33,7 @@ function divide(x, y) {
   return parseFloat(x) / parseFloat(y);
 };
 
-// Returns answers to equations using variables above
+// Returns answers to equations using math functions above
 function operate(x, y, operator) {
   if (operator === "add") {
     return add(x, y);
@@ -42,7 +42,7 @@ function operate(x, y, operator) {
   } else if (operator === "multiply") {
     return multiply(x, y);
   } else if (operator === "divide") {
-    return divide(x, y);
+    return divide(x, y).toFixed(5);
   } else {
     return "ERROR";
   }
@@ -60,7 +60,7 @@ function showNum() {
 
 // Stores number inputs
 function storeNumber(value) {
-  if (first === 0) {
+  if (first === null) {
     first = value;
   } else {
     second = value;
@@ -76,7 +76,7 @@ function storeOperator(operator) {
     clearDisplay();
     displayNumber(result);
     first = result;
-    second = 0;
+    second = null;
     currentOperator = operator;
   }
 }
@@ -98,8 +98,8 @@ function clearDisplay() {
 
 // Resets all values & clears display
 function clearAll() {
-  first = 0;
-  second = 0;
+  first = null;
+  second = null;
   currentOperator = null;
   clearDisplay();
 }
