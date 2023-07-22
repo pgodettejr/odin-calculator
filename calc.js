@@ -1,13 +1,8 @@
-const container = document.getElementById("container"); // Don't think I need this at all
-// const output = document.getElementById("output"); Think I use either this or const data below, but not both
 const data = document.querySelector(".display");
-// const buttons = document.querySelectorAll(".buttons button");
-
 const numButtons = document.querySelectorAll("button[data-type=number]");
 const opButtons = document.querySelectorAll("button[data-type=operator]");
 const equalButton = document.querySelector("button[data-type=equals]");
 const clearButton = document.querySelector("button[data-type=clear]");
-
 
 // Parts of a calculator operation (Me)
 let first = null;
@@ -48,12 +43,12 @@ function operate(x, y, operator) {
   }
 };
 
-// Displays numbers. Change data to output? output.value?
+// Displays numbers
 function displayNumber(number) {
   data.innerText += number;
 }
 
-// Shows results on display. Change data to output? output.value?
+// Shows results on display
 function showNum() {
   return data.innerText;
 }
@@ -91,7 +86,7 @@ function answer() {
   }
 }
 
-// Clears display. Change data to output? output.value?
+// Clears display
 function clearDisplay() {
   data.innerText = '';
 }
@@ -103,24 +98,6 @@ function clearAll() {
   currentOperator = null;
   clearDisplay();
 }
-
-// Runs operate, then populates answer on display as buttons are clicked
-// Will VERY likely need to separate this function into multiple forEach functions (number, operator, equals, clear - see DOM elements at top)
-/* buttons.forEach((button) => {
-  button.addEventListener('click', function() {
-    if (button.dataset.type === 'operator') {
-      operator = button.value;
-      answer();
-    } else if (button.dataset.type === 'number') {
-      output.value += button.value;
-    } else if (button.dataset.type === 'clear') {
-      output.value = '';
-      first = 0;
-      second = 0;
-      operator = '';
-    }
-  })
-}) */
 
 // Operator button functionality; populates next number on display
 opButtons.forEach((operator) => {
@@ -155,11 +132,6 @@ equalButton.addEventListener('click', () => {
 clearButton.addEventListener('click', () => {
   clearAll();
 });
-
-// May need this to prevent a "form submission" when entering buttons?
-/* data.addEventListener("submit", (e) => {
-   e.preventDefault();
-}) */
 
 
 // Old and/or incorrect code
@@ -344,4 +316,9 @@ operatorButtons.forEach((button) => {
   button.addEventListener('click', function() {
     operator = button.value;
   });
+}); 
+
+// May need this to prevent a "form submission" when entering buttons?
+data.addEventListener("submit", (e) => {
+   e.preventDefault();
 }); */
