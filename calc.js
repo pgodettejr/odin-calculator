@@ -9,10 +9,10 @@ const equalButton = document.querySelector("button[data-type=equals]");
 const clearButton = document.querySelector("button[data-type=clear]");
 
 
-// Parts of a calculator operation (Me). Change operator to currentOperator?
+// Parts of a calculator operation (Me)
 let first = null;
 let second = null;
-let operator = null;
+let currentOperator = null;
 let resetScreen = false;
 let result = null;
 
@@ -71,25 +71,25 @@ function storeNumber(value) {
   }
 }
 
-// Stores operator inputs. Change operator to currentOperator if variable is changed above & button.value to operator
+// Stores operator inputs
 function storeOperator(operator) {
-  if (operator === null) {
-    operator = button.value;
+  if (currentOperator === null) {
+    currentOperator = operator;
   } else if (first && second) {
     result = operate(Number(first), Number(second), operator);
     clearDisplay();
     displayNumber(result);
     first = result;
     second = null;
-    operator = button.value;
+    currentOperator = operator;
   }
 }
 
 // Calculates result
 function answer() {
-  if (first && operator && !resetScreen && !second) { 
+  if (first && currentOperator && !resetScreen && !second) { 
     storeOperator(showNum());
-    return operate(Number(first), Number(second), operator);
+    return operate(Number(first), Number(second), currentOperator);
   } else {
     return false;
   }
@@ -104,7 +104,7 @@ function clearDisplay() {
 function clearAll() {
   first = null;
   second = null;
-  operator = null;
+  currentOperator = null;
   clearDisplay();
 }
 
@@ -126,7 +126,7 @@ function clearAll() {
   })
 }) */
 
-// Operator button functionality; populates next number on display (ChatGPT)
+// Operator button functionality; populates next number on display
 opButtons.forEach((operator) => {
   operator.addEventListener('click', (e) => {
     storeNumber(showNum());
