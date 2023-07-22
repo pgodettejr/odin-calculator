@@ -10,43 +10,39 @@ const clearButton = document.querySelector("button[data-type=clear]");
 
 
 // Parts of a calculator operation (Me)
-let first = null;
-let second = null;
+let first = 0;
+let second = 0;
 let currentOperator = null;
 let resetScreen = false;
 let result = null;
 
-// Math functions (Me)
-const add = function(a, b) {
-  return a + b;
+// Math functions
+function add(x, y) {
+  return parseFloat(x) + parseFloat(y);
 };
 
-const subtract = function(c, d) {
-  return c - d;
+function subtract(x, y) {
+  return parseFloat(x) - parseFloat(y);
 };
 
-const multiply = function(array) {
-  return array.length
-    ? array.reduce((accumulator, nextItem) => accumulator * nextItem)
-    : 0;
+function multiply(x, y) {
+  return parseFloat(x) * parseFloat(y);
 };
 
-const divide = function(array) {
-  return array.length
-    ? array.reduce((accumulator, nextItem) => accumulator / nextItem)
-    : 0;
+function divide(x, y) {
+  return parseFloat(x) / parseFloat(y);
 };
 
-// Returns answers to equations using variables above (Me)
-function operate(operator, first, second) {
-  if (operator === '+') {
-    return add(first, second);
-  } else if (operator === '-') {
-    return subtract(first, second);
-  } else if (operator === '*') {
-    return multiply(first, second);
-  } else if (operator === '/') {
-    return divide(first, second);
+// Returns answers to equations using variables above
+function operate(x, y, operator) {
+  if (operator === "add") {
+    return add(x, y);
+  } else if (operator === "subtract") {
+    return subtract(x, y);
+  } else if (operator === "multiply") {
+    return multiply(x, y);
+  } else if (operator === "divide") {
+    return divide(x, y);
   } else {
     return "ERROR";
   }
@@ -64,7 +60,7 @@ function showNum() {
 
 // Stores number inputs
 function storeNumber(value) {
-  if (first === null) {
+  if (first === 0) {
     first = value;
   } else {
     second = value;
@@ -80,7 +76,7 @@ function storeOperator(operator) {
     clearDisplay();
     displayNumber(result);
     first = result;
-    second = null;
+    second = 0;
     currentOperator = operator;
   }
 }
@@ -102,8 +98,8 @@ function clearDisplay() {
 
 // Resets all values & clears display
 function clearAll() {
-  first = null;
-  second = null;
+  first = 0;
+  second = 0;
   currentOperator = null;
   clearDisplay();
 }
@@ -189,6 +185,27 @@ let second = 0;
 let operator = '';
 let result = ''
 
+// Math functions
+const add = function(a, b) {
+  return a + b;
+};
+
+const subtract = function(c, d) {
+  return c - d;
+};
+
+const multiply = function(array) {
+  return array.length
+    ? array.reduce((accumulator, nextItem) => accumulator * nextItem)
+    : 0;
+};
+
+const divide = function(array) {
+  return array.length
+    ? array.reduce((accumulator, nextItem) => accumulator / nextItem)
+    : 0;
+};
+
 const sum = function(multi) {
   let sum = 0;
   
@@ -226,6 +243,21 @@ const factorial = function(num) {
   return result;
 }; 
 
+// Returns answers to equations using variables above
+function operate(operator, first, second) {
+  if (operator === "+") {
+    return add(first, second);
+  } else if (operator === "-") {
+    return subtract(first, second);
+  } else if (operator === "*") {
+    return multiply(first, second);
+  } else if (operator === "/") {
+    return divide(first, second);
+  } else {
+    return "ERROR";
+  }
+};
+
 // Store first number input
 function storeFirst() {
   first = parseFloat(output.value);
@@ -237,7 +269,7 @@ function storeFirst() {
 // Store second number input
 function storeSecond() {
   second = parseFloat(output.value);
-  output.value = operate(operator, first, second);
+  output.value = operate(operator, x, y);
   first = parseFloat(output.value); // Added later. Not part of OG code
   return second;
 }
@@ -284,7 +316,7 @@ opButtons.forEach((button) => {
   button.addEventListener('click', () => {
     if (button.dataset.type === 'operator') {
       operator = button.value;
-      // output.value = operate(operator, first, second);
+      // output.value = operate(operator, x, y);
       answer();
     }
   });
