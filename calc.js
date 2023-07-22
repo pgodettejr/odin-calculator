@@ -1,6 +1,6 @@
 const container = document.getElementById("container"); // Don't think I need this at all
-const output = document.getElementById("output"); // Think I use either this or const data below, but not both
-const data = document.querySelector(".calc_display");
+// const output = document.getElementById("output"); Think I use either this or const data below, but not both
+const data = document.querySelector(".display");
 // const buttons = document.querySelectorAll(".buttons button");
 
 const numButtons = document.querySelectorAll("button[data-type=number]");
@@ -148,18 +148,16 @@ numButtons.forEach((number) => {
 
 // Equals button functionality
 equalButton.addEventListener('click', () => {
-  if (first && operator) {
-    output.value = operate(operator, first, parseFloat(output.value));
-    clearDisplay();
-    if (result) {
-      displayNumber(result);
-    }
+  result = answer();
+  clearDisplay();
+  if (result) {
+    displayNumber(result);
   }
 });
 
 // Clear button functionality
 clearButton.addEventListener('click', () => {
-  if (button.dataset.type === 'clear') {
+  if (button.dataset.type === "clear") {
     clearAll();
     /*output.value = '';
     first = 0;
@@ -176,10 +174,20 @@ clearButton.addEventListener('click', () => {
 
 // Old and/or incorrect code
 
-/* const numButtons = document.querySelectorAll(".number");
+/* const container = document.getElementById("container");
+const output = document.getElementById("output");
+const data = document.querySelector(".calc_display");
+const buttons = document.querySelectorAll(".buttons button");
+
+const numButtons = document.querySelectorAll(".number");
 const opButtons = document.querySelectorAll(".operator");
 const equalButton = document.querySelector(".equals");
 const clearButton = document.querySelector(".clear");
+
+let first = 0;
+let second = 0;
+let operator = '';
+let result = ''
 
 const sum = function(multi) {
   let sum = 0;
@@ -246,6 +254,24 @@ buttons.forEach((button) => {
   answer();
 });
 
+// Runs operate, then populates answer on display as buttons are clicked
+buttons.forEach((button) => {
+  button.addEventListener('click', function() {
+    if (button.dataset.type === 'operator') {
+      operator = button.value;
+      answer();
+    } else if (button.dataset.type === 'number') {
+      output.value += button.value;
+    } else if (button.dataset.type === 'clear') {
+      output.value = '';
+      first = 0;
+      second = 0;
+      operator = '';
+    }
+  })
+})
+
+// Number button functionality
 numButtons.forEach((button) => {
   button.addEventListener('click', () => {
     let buttonContent = button.innerText;
@@ -253,6 +279,7 @@ numButtons.forEach((button) => {
   });
 });
 
+// Operator button functionality
 opButtons.forEach((button) => {
   button.addEventListener('click', () => {
     if (button.dataset.type === 'operator') {
@@ -261,6 +288,28 @@ opButtons.forEach((button) => {
       answer();
     }
   });
+});
+
+// Equals button functionality
+equalButton.addEventListener('click', () => {
+  if (first && operator) {
+    output.value = operate(operator, first, parseFloat(output.value));
+    clearDisplay();
+    if (result) {
+      displayNumber(result);
+    }
+  }
+});
+
+// Clear button functionality
+clearButton.addEventListener('click', () => {
+  if (button.dataset.type === 'clear') {
+    clearAll();
+    output.value = '';
+    first = 0;
+    second = 0;
+    operator = '';
+  }
 });
 
 // This SHOULD add event listeners for operator buttons but it doesn't (ChatGPT)

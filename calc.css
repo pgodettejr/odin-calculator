@@ -23,17 +23,14 @@ body {
   /* border-radius: 10px; */
 }
 
-.calc_display {
-  margin-bottom: 2em;
-}
-
-input[type="text"] {
+.display {
   font-size: 50px;
   background-color: #2b2a2a;
   border-radius: 20px;
   text-align: end;
   width: 300px;
   height: 1.25em;
+  margin-bottom: 1em;
   color: #FFFFFF
 }
 
@@ -55,6 +52,22 @@ button {
 
 /* Buttons: Make operator text orange (#f69906 or #ff8800) and CE text a type of blue (start with #b9fffc for blue) */
 
+/* Old CSS
+.calc_display {
+  margin-bottom: 2em;
+}
+
+input[type="text"] {
+  font-size: 50px;
+  background-color: #2b2a2a;
+  border-radius: 20px;
+  text-align: end;
+  width: 300px;
+  height: 1.25em;
+  color: #FFFFFF
+} 
+
+*/
 
 /* Old CSS from Karan @ dev.to
 
