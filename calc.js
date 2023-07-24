@@ -4,7 +4,7 @@ const opButtons = document.querySelectorAll("button[data-type=operator]");
 const equalButton = document.querySelector("button[data-type=equals]");
 const clearButton = document.querySelector("button[data-type=clear]");
 
-// Parts of a calculator operation (Me)
+// Parts of a calculator operation
 let first = null;
 let second = null;
 let currentOperator = null;
@@ -79,10 +79,10 @@ function storeOperator(operator) {
 // Calculates result
 function answer() {
   if (first && currentOperator && !resetScreen && !second) { 
-    storeOperator(showNum());
+    storeNumber(showNum());
     return operate(Number(first), Number(second), currentOperator);
   } else {
-    return null;
+    return false;
   }
 }
 
@@ -103,7 +103,7 @@ function clearAll() {
 opButtons.forEach((operator) => {
   operator.addEventListener('click', (e) => {
     storeNumber(showNum());
-    storeOperator(e.target.dataset.type);
+    storeOperator(e.target.id); // Changed from dataset.type to id
     resetScreen = true;
   });
 });
